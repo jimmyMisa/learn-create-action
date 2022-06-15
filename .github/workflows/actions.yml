@@ -21,6 +21,6 @@ jobs:
               "title":"Automated issue ${{ github.sha}}",
               "body":"main issue required workflow **${{github.workflow }}**".\n\n The commits hash : _${{ github.sha}}_.",
               "assignees":[
-                "${{github.event.push.user.login}}" 
+                "${{github.event.actor.login}}" 
               ]
               }'
