@@ -4,23 +4,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/hello
+      - uses: ./.github/actions/hello-docker
         id: hello
         with:
           who-to-greet: "World k"
       - run: |
           echo "Time: ${{ steps.hello.outputs.time }}"
-      - uses: ./.github/actions/issues
-        id: issue
-        if: failure()
-        with:
-            token: ${{ secrets.CUSTOM_TOKEN }}
-            title: "New Automated issue ${{ github.sha}}"
-            body: |
-                main issue required workflow **${{github.workflow }}**.
-                The commits hash : _${{ github.sha}}_.
-            assignees: |
-                ${{ github.event.sender.login }}
+      
+      # - uses: ./.github/actions/issues
+      #   id: issue
+      #   if: failure()
+      #   with:
+      #       token: ${{ secrets.CUSTOM_TOKEN }}
+      #       title: "New Automated issue ${{ github.sha}}"
+      #       body: |
+      #           main issue required workflow **${{github.workflow }}**.
+      #           The commits hash : _${{ github.sha}}_.
+      #       assignees: |
+      #           ${{ github.event.sender.login }}
+      
       # - name: Create issues
       #   if: failure()
       #   run: |

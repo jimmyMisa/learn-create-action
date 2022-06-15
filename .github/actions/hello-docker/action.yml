@@ -1,0 +1,17 @@
+name: Hello World
+author: jimmy Misa
+description: Test description docker
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: Ali
+outputs:
+  time:
+    description: "The greeting time"
+runs:
+  using: "docker"
+  image: "dockerfile"
+  # entrypoint:
+  args:
+    - ${{ inputs.who-to-greet }}
