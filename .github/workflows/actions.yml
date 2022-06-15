@@ -3,13 +3,13 @@ jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/hello-docker
-        id: hello
-        with:
-          who-to-greet: "World k"
-      - run: |
-          echo "Time: ${{ steps.hello.outputs.time }}"
+      # - uses: actions/checkout@v2
+      # - uses: ./.github/actions/hello-docker
+      #   id: hello
+      #   with:
+      #     who-to-greet: "World k"
+      # - run: |
+      #     echo "Time: ${{ steps.hello.outputs.time }}"
 
       # - uses: ./.github/actions/issues
       #   id: issue
@@ -23,20 +23,24 @@ jobs:
       #       assignees: |
       #           ${{ github.event.sender.login }}
       
-      - name: Create issues
-        if: failure()
+      # - name: Create issues
+      #   if: failure()
+      #   run: |
+      #       curl --request POST \
+      #       --url https://api.github.com/repos/${{ github.repository }}/issues \
+      #       --header 'authorization: Bearer ${{ secrets.CUSTOM_TOKEN }}' \
+      #       --header 'content-type: application/json' \
+      #       --data '{
+      #         "title":"Automated issue ${{ github.sha}}",
+      #         "body":"main issue required workflow **${{github.workflow }}**.\n\n The commits hash : _${{ github.sha}}_.",
+      #         "assignees":[
+      #           "${{github.event.sender.login }}" 
+      #         ]
+      #         }
+      
+      - name: Slack push notif
         run: |
-            curl --request POST \
-            --url https://api.github.com/repos/${{ github.repository }}/issues \
-            --header 'authorization: Bearer ${{ secrets.CUSTOM_TOKEN }}' \
-            --header 'content-type: application/json' \
-            --data '{
-              "title":"Automated issue ${{ github.sha}}",
-              "body":"main issue required workflow **${{github.workflow }}**.\n\n The commits hash : _${{ github.sha}}_.",
-              "assignees":[
-                "${{github.event.sender.login }}" 
-              ]
-              }'
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"notificaiton from GA"}' ${{ secrets.SLACK_WEBHOOK }}
       
       # - name: Debug
       #   run: |
