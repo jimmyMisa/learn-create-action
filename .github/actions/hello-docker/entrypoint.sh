@@ -15,4 +15,6 @@ echo "other"
 echo "other"
 echo "::endgroup::"
 
+exit 1
+
 # echo "::set-env name=HELLO::hello"
