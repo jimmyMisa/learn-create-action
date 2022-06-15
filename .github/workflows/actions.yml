@@ -3,28 +3,28 @@ jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v2
-      # - uses: ./.github/actions/hello
-      #   id: hello
-      #   with:
-      #     who-to-greet: "World k"
-      # - run: |
-      #     echo "Time: ${{ steps.hello.outputs.time }}"
-      # - name: Create issues
-      #   if: failure()
-      #   run: |
-      #       curl --request POST \
-      #       --url https://api.github.com/repos/${{ github.repository }}/issues \
-      #       -- header 'authorization: Bearer ${{ secrets.CUSTOM_TOKEN }}' \
-      #       -- headedr 'content-type: application/json' \
-      #       --data '{
-      #         "title":"Automated issue ${{ github.sha}}",
-      #         "body":"main issue required workflow **${{github.workflow }}**".\n\n The commits hash : _${{ github.sha}}_.",
-      #         "assignees":[
-      #           "${{github.event.actor.login}}" 
-      #         ]
-      #         }'
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/hello
+        id: hello
+        with:
+          who-to-greet: "World k"
+      - run: |
+          echo "Time: ${{ steps.hello.outputs.time }}"
       - name: Create issues
+        if: failure()
         run: |
-            echo "123"
-            echo "${{ toJson(github) }}"
+            curl --request POST \
+            --url https://api.github.com/repos/${{ github.repository }}/issues \
+            -- header 'authorization: Bearer ${{ secrets.CUSTOM_TOKEN }}' \
+            -- headedr 'content-type: application/json' \
+            --data '{
+              "title":"Automated issue ${{ github.sha}}",
+              "body":"main issue required workflow **${{github.workflow }}**".\n\n The commits hash : _${{ github.sha}}_.",
+              "assignees":[
+                "${{github.event.sender.login }}" 
+              ]
+              }'
+      # - name: Debug
+      #   run: |
+      #       echo "123"
+      #       echo "${{ toJson(github) }}"
