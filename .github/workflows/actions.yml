@@ -27,4 +27,4 @@ jobs:
       - name: Create issues
         run: |
             echo "123"
-            echo "${{ github.event.actor.login }}"
+            echo "${{ toJson(github) }}"
