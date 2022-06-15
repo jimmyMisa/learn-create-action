@@ -8927,6 +8927,7 @@ var title = core.getInput("title");
 var body = core.getInput("body");
 var assignees = core.getInput("assignees");
 assignees = assignees.split("\n");
+console.log(assignees)
 
 async function run(){
     try{
