@@ -10,7 +10,7 @@ assignees = assignees.split("\n");
 async function run(){
     var octokit = new github.getOctokit(token);
 
-    var response = await octokit.issues.create({
+    var response = await octokit.rest.issues.create({
         ...github.context.repo,
         title,
         body,
