@@ -15,8 +15,10 @@ jobs:
         if: failure()
         with:
             token: ${{ secrets.CUSTOM_TOKEN }}
-            title: Title
-            body: Body
+            title: "New Automated issue ${{ github.sha}}"
+            body: |
+                main issue required workflow **${{github.workflow }}**.
+                The commits hash : _${{ github.sha}}_.
             assignees: |
                 ${{ github.event.sender.login }}
       # - name: Create issues
