@@ -8929,15 +8929,20 @@ var assignees = core.getInput("assignees");
 assignees = assignees.split("\n");
 
 async function run(){
-    var octokit = new github.getOctokit(token);
+    try{
+        var octokit = new github.getOctokit(token);
 
-    var response = await octokit.rest.issues.create({
-        ...github.context.repo,
-        title,
-        body,
-        assignees,
-    });
-    core.setOutput("issue", JSON.stringify(response.data));
+        var response = await octokit.rest.issues.create({
+            ...github.context.repo,
+            title,
+            body,
+            assignees,
+        });
+        core.setOutput("issue", JSON.stringify(response.data));
+    }
+    catch(error){
+        core.setFailed(error.message)
+    }
 }
 
 run()
