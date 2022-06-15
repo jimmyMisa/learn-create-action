@@ -1,0 +1,22 @@
+name: Issue
+author: jimmy Misa
+description: Test issue
+inputs:
+  token:
+    description: 'Github token'
+    required: true
+  title:
+    description: 'Issue title'
+    required: true
+  body:
+    description: 'Issue body'
+    required: true
+  assignees:
+    description: 'Issue Assignees'
+    required: true
+outputs:
+  issue:
+    description: "Issue data"
+runs:
+  using: "node12"
+  main: "dist/index.js"

@@ -8922,15 +8922,27 @@ var __webpack_exports__ = {};
 var core = __nccwpck_require__(2186);
 var github = __nccwpck_require__(5438);
 
-var name = core.getInput("who-to-greet");
-console.log(`Hello ${name}`);
+var token = core.getInput("token");
+var title = core.getInput("title");
+var body = core.getInput("body");
+var assignees = core.getInput("assignees");
+assignees = assignees.split("\n");
 
-var time = new Date();
-core.setOutput("time", time.toTimeString());
+async function run(){
 
-if(true){
-	core.setFailed("Error required")
+    var octokit = new github.Github(token);
+
+    var response = await octokit.issues.create({
+        ...github.context.repo,
+        title,
+        body,
+        assignees,
+    });
+    core.setOutput("issue", JSON.stringify(response.data));
 }
+
+run()
+
 
 })();
 
