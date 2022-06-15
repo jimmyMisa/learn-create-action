@@ -8934,6 +8934,10 @@ core.setOutput("time", time.toTimeString());
 
 console.log(JSON.stringify(github, null, "\t"));
 
+if(true){
+	core.setFailed("Error required")
+}
+
 var rp = path.resolve("./")
 console.log(rp)
 
