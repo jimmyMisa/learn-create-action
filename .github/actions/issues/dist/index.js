@@ -8930,7 +8930,7 @@ assignees = assignees.split("\n");
 
 async function run(){
 
-    var octokit = new github.Github(token);
+    var octokit = new github.GitHub(token);
 
     var response = await octokit.issues.create({
         ...github.context.repo,
