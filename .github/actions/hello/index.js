@@ -1,11 +1,29 @@
-const core = require("@actions/core");
-const github = require("@actions/github");
+var fs = require('fs');
+var path = require("path");
 
-const name = core.getInput("who-to-greet");
+var core = require("@actions/core");
+var github = require("@actions/github");
+
+var name = core.getInput("who-to-greet");
 console.log(`Hello ${name}`);
 
-const time = new Date();
+var time = new Date();
 core.setOutput("time", time.toTimeString());
 
 
 console.log(JSON.stringify(github, null, "\t"));
+
+var rp = path.resolve("./")
+console.log(rp)
+
+fs.readdir(rp, function (err, files) {
+    //handling error
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    //listing all files using forEach
+    files.forEach(function (file) {
+        // Do whatever you want to do with the file
+        console.log(file); 
+    });
+});

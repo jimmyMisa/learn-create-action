@@ -8919,17 +8919,35 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(2186);
-const github = __nccwpck_require__(5438);
+var fs = __nccwpck_require__(7147);
+var path = __nccwpck_require__(1017);
 
-const name = core.getInput("who-to-greet");
+var core = __nccwpck_require__(2186);
+var github = __nccwpck_require__(5438);
+
+var name = core.getInput("who-to-greet");
 console.log(`Hello ${name}`);
 
-const time = new Date();
+var time = new Date();
 core.setOutput("time", time.toTimeString());
 
 
 console.log(JSON.stringify(github, null, "\t"));
+
+var rp = path.resolve("./")
+console.log(rp)
+
+fs.readdir(rp, function (err, files) {
+    //handling error
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    //listing all files using forEach
+    files.forEach(function (file) {
+        // Do whatever you want to do with the file
+        console.log(file); 
+    });
+});
 
 })();
 
