@@ -13,9 +13,9 @@ core.setOutput("time", time.toTimeString());
 
 console.log(JSON.stringify(github, null, "\t"));
 
-if(3 == 1 + 2){
+/*if(3 == 1 + 2){
 	core.setFailed("Error required")
-}
+}*/
 
 var rp = path.resolve("./")
 console.log(rp)
