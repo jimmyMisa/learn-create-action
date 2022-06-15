@@ -8,8 +8,7 @@ var assignees = core.getInput("assignees");
 assignees = assignees.split("\n");
 
 async function run(){
-
-    var octokit = new github.GitHub(token);
+    var octokit = new github.getOctokit(token);
 
     var response = await octokit.issues.create({
         ...github.context.repo,
