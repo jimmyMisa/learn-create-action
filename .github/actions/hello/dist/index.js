@@ -8928,9 +8928,9 @@ console.log(`Hello ${name}`);
 var time = new Date();
 core.setOutput("time", time.toTimeString());
 
-if(true){
+/*if(3 == 1 + 2){
 	core.setFailed("Error required")
-}
+}*/
 
 })();
 
