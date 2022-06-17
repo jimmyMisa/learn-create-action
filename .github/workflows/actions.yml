@@ -3,13 +3,13 @@ jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/hello-docker
-        id: hello
-        with:
-          who-to-greet: "World k"
-      - run: |
-          echo "Time: ${{ steps.hello.outputs.time }}"
+      # - uses: actions/checkout@v2
+      # - uses: ./.github/actions/hello-docker
+      #   id: hello
+      #   with:
+      #     who-to-greet: "World k"
+      # - run: |
+      #     echo "Time: ${{ steps.hello.outputs.time }}"
 
       # - uses: ./.github/actions/issues
       #   id: issue
@@ -42,7 +42,7 @@ jobs:
       #   run: |
       #       curl -X POST -H 'Content-type: application/json' --data '{"text":"notificaiton from GA"}' ${{ secrets.SLACK_WEBHOOK }}
       
-      # - name: Debug
-      #   run: |
-      #       echo "123"
-      #       echo "${{ toJson(github) }}"
+      - name: Debug
+        run: |
+            echo "123"
+            echo "${{ toJson(github) }}"
