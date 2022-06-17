@@ -1,0 +1,17 @@
+name: Dispacth Webhook
+id: w1v1
+on:
+  repository_dispatch: 
+    types:
+        - build
+jobs:
+  testing-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/hello-docker
+        id: hello
+        with:
+          who-to-greet: "World k"
+      - run: |
+          echo "Time: ${{ steps.hello.outputs.time }}"
