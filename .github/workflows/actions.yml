@@ -50,8 +50,19 @@ jobs:
       #       echo "${{ toJson(github) }}"    
       
       - uses: actions/checkout@v2
+      - name: Cache node_modudules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-key: |
+            ${{ runner.os }}-node-
+      - name: Use NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm ci
       - name: Create a release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN}}
