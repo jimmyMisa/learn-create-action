@@ -49,8 +49,8 @@ jobs:
       #       echo "123"
       #       echo "${{ toJson(github) }}"    
       
+      - uses: actions/checkout@v2
       - name: Create a release
-        uses: actions/checkout@v2
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
