@@ -1,4 +1,6 @@
-on: push
+on:
+  push:
+    branches: [master]
 jobs:
   testing-action:
     runs-on: ubuntu-latest
@@ -42,7 +44,12 @@ jobs:
       #   run: |
       #       curl -X POST -H 'Content-type: application/json' --data '{"text":"notificaiton from GA"}' ${{ secrets.SLACK_WEBHOOK }}
       
-      - name: Debug
-        run: |
-            echo "123"
-            echo "${{ toJson(github) }}"
+      # - name: Debug
+      #   run: |
+      #       echo "123"
+      #       echo "${{ toJson(github) }}"    
+      
+      - name: Create a release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
